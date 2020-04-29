@@ -1,5 +1,11 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## This is very Simple react base application for learning purpose. 
+
+### Featurs
+Add to cart, remove product from cart, clear cart, checkout etc.
+
+
 ## Available Scripts
 
 In the project directory, you can run:
