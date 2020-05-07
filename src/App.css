@@ -126,5 +126,45 @@
   font-size: 16px;
 }
 
+.cart.dark{
+  background:#000;
+  color:#fff
 
+}
+
+.cart.light{
+  background: #fff;
+  color: #000;
+}
+.product-list.dark{
+  background:#000;
+  color:#fff
+
+}
+
+.product-list.light{
+  background: #fff;
+  color: #000;
+}
+
+
+.App.dark{
+  background:#000;
+  color:#fff
+
+}
+
+.App.light{
+  background: #fff;
+  color: #000;
+}
+
+
+.links a{
+  color: #fff;
+  padding-left: 10px;
+  text-decoration: none;
+  font-size: 15px;
+  border: 2px solid #fff;
+}
 

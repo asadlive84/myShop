@@ -1,55 +1,41 @@
-import React,{useState, useEffect} from 'react';
+import React,{useState} from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
 import './App.css';
-
-import data from './data'
-
 import NavBar from './NavBar/NavBar'
-import ProductList from './ProductList/ProductList'
-import Cart from './Cart/Cart'
 import Footer from './Footer/Footer'
-
-import useCart from './useCart';
-
+import ThemeContext from './ThemeContext';
+import Checkout from './checkout/Checkout'
+import ProductDetails from './ProductList/ProductDetails';
+import Home from './Home/Home'
 
 const App = ()=> {
-  const [products, setProducts] = useState([...data])
-  
   const [keyword, setKeyword] = useState('')
-  
-  const {
-    cartItems,
-    clearCart,
-    removeCartItem,
-    addCartItem,
-    quantityCount
-  } = useCart([], products)
+  const [dark, setDark] = useState(false)
 
-  useEffect(()=>{
-
-    const results = data.filter(product=>product.title.includes(keyword) || product.brand.includes(keyword))
-    
-    setProducts(results)
-
-  },[keyword])
-
-
-
-  
-
-
+  const toggleDark = () =>{
+    setDark(isDark=>!isDark)
+  }
   
   return (
-    <div className="App">
-      <NavBar setKeyword={setKeyword}/>
-      <ProductList products={products} addCartItem={addCartItem}/>
-      <Cart 
-        quantityCount={quantityCount} 
-        cartItems={cartItems} 
-        removeCartItem={removeCartItem}
-        clearCart={clearCart}
-        />
-      <Footer/>
-    </div>
+    <ThemeContext.Provider 
+      value = {{dark:dark, toggle:toggleDark }}>
+      <div className={`App ${dark ? 'light':'dark'} `}>
+        <Router>
+          <NavBar setKeyword={setKeyword}/>
+          <Switch>
+            <Route path="/checkout/" component={Checkout} />
+            <Route path="/product/:productId/" component={ProductDetails}/>
+            <Route path="/" component={()=><Home keyword={keyword}/>   }/>
+          </Switch>
+        </Router>
+        <Footer/>
+      </div>
+    </ThemeContext.Provider>
+    
   );
 }
 

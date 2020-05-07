@@ -1,29 +1,14 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import ThemeContext from '../ThemeContext'
 
-
-const Product = ({id, title, brand, price, image, addCartItem}) =>{
-    return(
-        <div className="product">
-            <img src={image} alt={title}/>
-            <div className="title">
-                <spam>{title}</spam>
-                <spam>{brand}</spam>
-
-            </div>
-            <div className="actions">
-                <spam>${price}</spam>
-                <button onClick={()=>addCartItem(id)}>Add to cart</button>
-
-            </div>
-          </div>
-    )
-}
+import ListProduct from './ListProduct'
 
 
 const ProductList = ({products, addCartItem}) =>{
+    const {dark} = useContext(ThemeContext)
     return (
-      <div className="product-list">
-          {products.map(product=> <Product addCartItem={addCartItem} {...product} key={product.id}/>)}
+      <div className={`product-list ${dark ? 'light':'dark'} `}>
+          {products.map(product=> <ListProduct addCartItem={addCartItem} {...product} key={product.id}/>)}
          
       </div>
     )
